@@ -13,6 +13,7 @@ interface StatCardProps {
   };
   description?: string;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const StatCard = ({
@@ -22,12 +23,16 @@ const StatCard = ({
   trend,
   description,
   className,
+  style,
 }: StatCardProps) => {
   return (
-    <div className={cn(
-      "bg-white rounded-lg p-6 shadow-sm transition-all duration-300 card-hover animate-fade-in",
-      className
-    )}>
+    <div 
+      className={cn(
+        "bg-white rounded-lg p-6 shadow-sm transition-all duration-300 card-hover animate-fade-in",
+        className
+      )}
+      style={style}
+    >
       <div className="flex justify-between items-start mb-4">
         <h3 className="text-sm font-medium text-gray-500">{title}</h3>
         {icon && (
