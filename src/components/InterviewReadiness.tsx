@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { CircularProgress } from '@/components/CircularProgress';
+import CircularProgress from '@/components/CircularProgress';
 import { AlertTriangle, CheckCircle, Code, FileText, GraduationCap, BookOpen, BrainCircuit, Coffee } from 'lucide-react';
 
 interface SkillRating {

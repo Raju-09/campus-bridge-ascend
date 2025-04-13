@@ -5,7 +5,7 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { CheckCircle, Clock, FileText, BookOpen, Award, Briefcase, AlertTriangle, ChevronDown, ChevronUp } from 'lucide-react';
-import { CircularProgress } from '@/components/CircularProgress';
+import CircularProgress from '@/components/CircularProgress';
 import { cn } from '@/lib/utils';
 
 interface ReadinessSection {
