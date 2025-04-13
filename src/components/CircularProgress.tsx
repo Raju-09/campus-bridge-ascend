@@ -10,6 +10,11 @@ interface CircularProgressProps {
   label?: string;
   labelClassName?: string;
   className?: string;
+  style?: React.CSSProperties;
+  showAnimation?: boolean;
+  animationDuration?: number;
+  trailColor?: string;
+  innerContent?: React.ReactNode;
 }
 
 const CircularProgress = ({
@@ -17,9 +22,14 @@ const CircularProgress = ({
   size = 100,
   strokeWidth = 6,
   color = 'stroke-campus-blue',
+  trailColor = 'stroke-gray-200',
   label,
   labelClassName,
   className,
+  style,
+  showAnimation = true,
+  animationDuration = 1000,
+  innerContent,
 }: CircularProgressProps) => {
   const [progress, setProgress] = useState(0);
   
@@ -30,15 +40,20 @@ const CircularProgress = ({
   
   // Animate progress on mount and when percentage changes
   useEffect(() => {
+    if (!showAnimation) {
+      setProgress(percentage);
+      return;
+    }
+    
     const timer = setTimeout(() => {
       setProgress(percentage);
     }, 100);
     
     return () => clearTimeout(timer);
-  }, [percentage]);
+  }, [percentage, showAnimation]);
 
   return (
-    <div className={cn("flex flex-col items-center justify-center", className)}>
+    <div className={cn("flex flex-col items-center justify-center", className)} style={style}>
       <div className="relative" style={{ width: size, height: size }}>
         <svg
           width={size}
@@ -50,7 +65,7 @@ const CircularProgress = ({
             cx={size / 2}
             cy={size / 2}
             r={radius}
-            className="stroke-gray-200"
+            className={trailColor}
             strokeWidth={strokeWidth}
             fill="none"
           />
@@ -65,12 +80,16 @@ const CircularProgress = ({
             strokeDasharray={circumference}
             strokeDashoffset={strokeDashoffset}
             style={{
-              transition: "stroke-dashoffset 1s ease-in-out"
+              transition: showAnimation ? `stroke-dashoffset ${animationDuration}ms ease-in-out` : "none"
             }}
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className={cn("text-2xl font-bold", labelClassName)}>{percentage}%</span>
+          {innerContent ? (
+            innerContent
+          ) : (
+            <span className={cn("text-2xl font-bold", labelClassName)}>{percentage}%</span>
+          )}
         </div>
       </div>
       {label && <span className="mt-2 text-sm font-medium text-gray-600">{label}</span>}

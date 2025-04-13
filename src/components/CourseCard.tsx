@@ -1,95 +1,94 @@
 
 import React from 'react';
-import { cn } from '@/lib/utils';
-import { Book, Clock, Users } from 'lucide-react';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
+import { Clock, Users, BookOpen } from 'lucide-react';
 
 interface CourseCardProps {
+  id: string;
   title: string;
   description: string;
-  instructor?: string;
-  duration?: string;
-  students?: number;
+  instructor: string;
+  duration: string;
+  students: number;
   progress?: number;
   image?: string;
-  className?: string;
+  category: string;
+  level: 'Beginner' | 'Intermediate' | 'Advanced';
   onClick?: () => void;
 }
 
 const CourseCard = ({
+  id,
   title,
   description,
   instructor,
   duration,
   students,
-  progress,
+  progress = 0,
   image,
-  className,
-  onClick,
+  category,
+  level,
+  onClick
 }: CourseCardProps) => {
   return (
-    <div 
-      className={cn(
-        "bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 card-hover cursor-pointer",
-        className
-      )}
-      onClick={onClick}
-    >
-      <div className="h-36 overflow-hidden">
-        {image ? (
-          <img 
-            src={image} 
-            alt={title} 
-            className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-r from-campus-blue to-campus-lightblue flex items-center justify-center">
-            <Book size={48} className="text-white" />
-          </div>
-        )}
+    <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 h-full flex flex-col">
+      <div className="relative h-48">
+        <img 
+          src={image || "https://images.unsplash.com/photo-1516397281156-ca07cf9746fc?auto=format&fit=crop&w=500&q=80"} 
+          alt={title}
+          className="w-full h-full object-cover"
+        />
+        <Badge className="absolute top-3 right-3 bg-campus-blue">
+          {level}
+        </Badge>
+        <Badge className="absolute top-3 left-3 bg-white text-black font-medium">
+          {category}
+        </Badge>
       </div>
       
-      <div className="p-4">
-        <h3 className="font-semibold text-lg mb-1 line-clamp-1">{title}</h3>
-        <p className="text-gray-600 text-sm line-clamp-2 mb-4">{description}</p>
-        
-        <div className="flex items-center justify-between text-xs text-gray-500">
-          {instructor && (
-            <div className="flex items-center">
-              <span className="font-medium">{instructor}</span>
-            </div>
-          )}
-          
-          {duration && (
-            <div className="flex items-center">
-              <Clock size={14} className="mr-1" />
-              <span>{duration}</span>
-            </div>
-          )}
-          
-          {students !== undefined && (
-            <div className="flex items-center">
-              <Users size={14} className="mr-1" />
-              <span>{students}</span>
-            </div>
-          )}
-        </div>
-        
-        {progress !== undefined && (
-          <div className="mt-3">
-            <div className="flex justify-between text-xs mb-1">
-              <span className="font-medium">Progress</span>
-              <span>{progress}%</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-1.5">
-              <div 
-                className="bg-campus-blue h-1.5 rounded-full transition-all duration-500" 
-                style={{ width: `${progress}%` }} 
-              />
-            </div>
+      <CardHeader className="pb-2">
+        <CardTitle className="line-clamp-1">{title}</CardTitle>
+        <CardDescription className="flex items-center text-sm">
+          <span className="font-medium text-campus-blue">{instructor}</span>
+        </CardDescription>
+      </CardHeader>
+      
+      <CardContent className="pb-4 flex-grow">
+        <p className="text-sm text-gray-600 mb-4 line-clamp-3">{description}</p>
+        <div className="flex flex-wrap gap-4 text-xs text-gray-500">
+          <div className="flex items-center">
+            <Clock size={14} className="mr-1" />
+            {duration}
           </div>
-        )}
-      </div>
-    </div>
+          <div className="flex items-center">
+            <Users size={14} className="mr-1" />
+            {students} students
+          </div>
+        </div>
+      </CardContent>
+      
+      {progress > 0 && (
+        <div className="px-6 pb-2">
+          <div className="flex justify-between text-xs text-gray-600 mb-1">
+            <span>Progress</span>
+            <span>{progress}%</span>
+          </div>
+          <Progress value={progress} className="h-1" />
+        </div>
+      )}
+      
+      <CardFooter className="pt-2">
+        <Button 
+          onClick={onClick}
+          className="w-full bg-campus-blue hover:bg-blue-700 text-white"
+        >
+          {progress > 0 ? 'Continue Learning' : 'Start Course'}
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
 

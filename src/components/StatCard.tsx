@@ -28,7 +28,7 @@ const StatCard = ({
   return (
     <div 
       className={cn(
-        "bg-white rounded-lg p-6 shadow-sm transition-all duration-300 card-hover animate-fade-in",
+        "bg-white rounded-lg p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:translate-y-[-2px] card-hover animate-fade-in",
         className
       )}
       style={style}
