@@ -33,7 +33,7 @@ const StudentDashboard = () => {
   // Simulated courses
   const courses = [
     {
-      id: 1,
+      id: "cs-101",
       title: 'Introduction to Computer Science',
       description: 'Fundamentals of computer science including algorithms, data structures, and problem-solving.',
       instructor: 'Dr. Smith',
@@ -41,9 +41,11 @@ const StudentDashboard = () => {
       students: 48,
       progress: 68,
       image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=500&q=80',
+      category: 'Computer Science',
+      level: 'Beginner' as const
     },
     {
-      id: 2,
+      id: "dsa-102",
       title: 'Data Structures and Algorithms',
       description: 'Advanced study of data structures, algorithm design and analysis.',
       instructor: 'Prof. Johnson',
@@ -51,9 +53,11 @@ const StudentDashboard = () => {
       students: 36,
       progress: 45,
       image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=500&q=80',
+      category: 'Programming',
+      level: 'Intermediate' as const
     },
     {
-      id: 3,
+      id: "web-103",
       title: 'Web Development Fundamentals',
       description: 'Learn HTML, CSS, JavaScript and modern web development practices.',
       instructor: 'Sarah Williams',
@@ -61,6 +65,8 @@ const StudentDashboard = () => {
       students: 64,
       progress: 92,
       image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&q=80',
+      category: 'Web Development',
+      level: 'Beginner' as const
     },
   ];
 
@@ -189,6 +195,7 @@ const StudentDashboard = () => {
             {courses.map((course) => (
               <CourseCard
                 key={course.id}
+                id={course.id}
                 title={course.title}
                 description={course.description}
                 instructor={course.instructor}
@@ -196,6 +203,8 @@ const StudentDashboard = () => {
                 students={course.students}
                 progress={course.progress}
                 image={course.image}
+                category={course.category}
+                level={course.level}
                 onClick={() => navigate(`/student/courses/${course.id}`)}
               />
             ))}

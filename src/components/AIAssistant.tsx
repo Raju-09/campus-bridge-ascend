@@ -158,7 +158,7 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ className }) => {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyPress}
             className="min-h-[40px] flex-1 resize-none"
-            maxRows={3}
+            rows={3}
           />
           <Button 
             disabled={!input.trim()}

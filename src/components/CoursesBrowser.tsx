@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Search, Filter, BookOpen, Code, Database, CloudComputing, Smartphone } from 'lucide-react';
+import { Search, Filter, BookOpen, Code, Database, Cloud, Smartphone } from 'lucide-react';
 import { Course, coursesData, categorizedCourses } from '@/data/coursesData';
 import CourseCard from '@/components/CourseCard';
 
@@ -110,7 +110,7 @@ const CoursesBrowser = () => {
               Mobile
             </TabsTrigger>
             <TabsTrigger value="cloud" className="flex items-center">
-              <CloudComputing size={16} className="mr-2" />
+              <Cloud size={16} className="mr-2" />
               Cloud
             </TabsTrigger>
           </TabsList>
